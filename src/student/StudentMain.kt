@@ -29,9 +29,8 @@ fun main(args: Array<String>) {
     }
 
     println("*** 国語の平均点の算出 ***")
-    var sum = 0.0
-    studentList forEach {
-        sum = sum + it.kokugo.toDouble()
+    var sum = studentList.fold(0) {(sum, current: Student) ->
+        sum + current.kokugo
     }
     println("国語の平均点は${sum / studentList.size()}")
 }
