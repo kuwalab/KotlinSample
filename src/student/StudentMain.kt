@@ -20,4 +20,18 @@ fun main(args: Array<String>) {
     studentList forEach {
         println(it)
     }
+
+    println("*** 国語が60点以上の抽出 ***")
+    studentList filter {
+        it.kokugo >= 60
+    } forEach {
+        println(it)
+    }
+
+    println("*** 国語の平均点の算出 ***")
+    var sum = 0.0
+    studentList forEach {
+        sum = sum + it.kokugo.toDouble()
+    }
+    println("国語の平均点は${sum / studentList.size()}")
 }
