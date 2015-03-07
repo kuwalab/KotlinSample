@@ -1,10 +1,13 @@
 package test
 
 import org.junit.Test
+import org.junit.Assert.assertThat
+import org.hamcrest.CoreMatchers.`is` as eq
 import kotlin.test.assertEquals
 
 class LeapYearTest {
     Test fun 西暦1581年は閏年ではない() {
+        assertThat(isLeapYear(1581), eq(false))
         assertEquals(false, isLeapYear(1581))
     }
 
