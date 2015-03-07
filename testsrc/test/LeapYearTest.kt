@@ -17,7 +17,7 @@ class LeapYearTest {
     }
 
     Test fun 西暦1900年は閏年ではない() {
-        assertEquals(true, isLeapYear(2004))
+        assertEquals(false, isLeapYear(1900))
     }
 
     Test fun 西暦2000年は閏年() {
