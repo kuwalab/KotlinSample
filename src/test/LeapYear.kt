@@ -12,6 +12,8 @@ fun main(args: Array<String>) {
         println("整数で入力してください")
         return
     }
+
+    isLeapYear(year)
 }
 
 fun isLeapYear(year: Int): Boolean {
