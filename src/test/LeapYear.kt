@@ -1,5 +1,7 @@
 package test
 
+import java.util.Observable
+
 fun main(args: Array<String>) {
     if (args.size() != 1) {
         println("西暦年を入れてください")
