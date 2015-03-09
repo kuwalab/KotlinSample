@@ -21,7 +21,9 @@ fun main(args: Array<String>) {
 
     try {
         Files.newBufferedReader(inputPath, StandardCharsets.UTF_8).use {
-            it.lines()
+            it.forEachLine {
+                println(it)
+            }
         }
     } catch (e: IOException) {
         e.printStackTrace()
