@@ -1,43 +1,43 @@
 package poi
 
-import org.apache.poi.ss.usermodel.WorkbookFactory
-import java.io.File
+import java.io.FileInputStream
+import java.io.IOException
+import java.nio.file.Files
 import java.nio.file.Paths
 import org.apache.poi.ss.usermodel.Sheet
 import org.apache.poi.ss.usermodel.Cell
 import org.apache.poi.ss.usermodel.Row
 import org.apache.poi.ss.usermodel.Workbook
-import java.nio.file.Files
-import java.io.IOException
+import org.apache.poi.ss.usermodel.WorkbookFactory
 import kotlin.platform.platformStatic
 
 fun main(args: Array<String>) {
-    var workbook = Excel.open("res/ブック1.xlsx")
+    Excel.open("res/ブック1.xlsx").use { (workbook) ->
+        var sheet = workbook.getSheetAt(0)
 
-    var sheet = workbook.getSheetAt(0)
+        println(sheet[0, 0])
+        println(sheet[1, 1])
+        println(sheet[0, 3])
+        // 無いセルも安全
+        println(sheet[100, 100])
+        sheet[0, 10] = "あいうえお"
+        sheet[0, 11] = 100
+        sheet[0, 12] = 1.2
 
-    println(sheet[0, 0])
-    println(sheet[1, 1])
-    println(sheet[0, 3])
-    sheet[0, 10] = "あいうえお"
-    sheet[0, 11] = 100
-    sheet[0, 12] = 1.2
-
-    Excel.write(workbook, "res/ブック2.xlsx")
-
-    workbook.close()
+        Excel.write(workbook, "res/ブック2.xlsx")
+    }
 }
 
 class Excel {
     class object {
         platformStatic fun open(fileName: String): Workbook {
-            return WorkbookFactory.create(Paths.get(fileName).toFile())
+            return WorkbookFactory.create(FileInputStream(Paths.get(fileName).toFile()))
         }
 
         platformStatic fun write(workbook: Workbook, fileName: String) {
-            var output = Paths.get(fileName)
+            var outputPath = Paths.get(fileName)
             try {
-                Files.newOutputStream(output).use {
+                Files.newOutputStream(outputPath).use {
                     workbook.write(it)
                 }
             } catch (e: IOException) {
