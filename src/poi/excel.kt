@@ -56,8 +56,8 @@ fun Row.get(n: Int): Cell {
 }
 
 fun Sheet.get(x: Int, y: Int): Cell {
-    var row = this.getRow(y) ?: this.createRow(y)
-    return row.getCell(x) ?: row.createCell(x, Cell.CELL_TYPE_BLANK)
+    var row = this[y]
+    return row[x]
 }
 
 fun Sheet.set(x: Int, y: Int, value: Any) {
