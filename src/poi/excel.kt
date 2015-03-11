@@ -15,11 +15,13 @@ fun main(args: Array<String>) {
     Excel.open("res/ブック1.xlsx").use { (workbook) ->
         var sheet = workbook.getSheetAt(0)
 
+        // セルの読み込み
         println(sheet[0, 0])
         println(sheet[1, 1])
         println(sheet[0, 3])
-        // 無いセルも安全
+        // 値がないセルも安全
         println(sheet[100, 100])
+        // セルの書き込み
         sheet[0, 10] = "あいうえお"
         sheet[0, 11] = 100
         sheet[0, 12] = 1.2
