@@ -11,26 +11,24 @@ import java.util.ResourceBundle
 import javafx.scene.control.TextField
 import javafx.scene.control.Label
 import javafx.fxml.FXML
+import javafx.stage.Stage
+import javafx.scene.control.Alert
+import javafx.scene.control.Alert.AlertType
 
-// http://pekokun.hatenablog.jp/entry/2013/12/08/190540
-class Hello() : javafx.application.Application() {
-
-    override fun start(primaryStage: javafx.stage.Stage?) {
+// 参考 http://pekokun.hatenablog.jp/entry/2013/12/08/190540
+class Hello() : Application() {
+    override fun start(stage: Stage) {
         val root: Parent = FXMLLoader.load(javaClass<Hello>().getResource("hello.fxml"))
 
         val scene: Scene = Scene(root)
 
-        primaryStage!!
-        primaryStage.setTitle("Hello KotlinFX")
-        primaryStage.setWidth(300.0)
-        primaryStage.setHeight(250.0)
-        primaryStage.setScene(scene)
-        primaryStage.show()
+        stage.setTitle("Hello Kotlin")
+        stage.setScene(scene)
+        stage.show()
     }
 }
 
 class HelloController() : Initializable {
-
     FXML var textField: TextField? = null
     FXML var label: Label? = null
 
@@ -38,11 +36,14 @@ class HelloController() : Initializable {
     }
 
     FXML fun handle(event: ActionEvent): Unit {
-        label?.setText("Hello, " + textField?.getText() + "!");
+        var alert = Alert(AlertType.INFORMATION);
+        alert.setTitle("Show and Wait");
+        alert.getDialogPane().setHeaderText("Header Text");
+        alert.getDialogPane().setContentText("Content Text");
+        alert.showAndWait();
     }
-
 }
 
 fun main(args: Array<String>) {
-    Application.launch(javaClass<Hello>(), args.makeString(" "))
+    Application.launch(javaClass<Hello>())
 }
