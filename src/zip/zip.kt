@@ -18,7 +18,7 @@ fun main(args: Array<String>) {
             } else {
                 FileOutputStream(Paths.get("res", "zip", entry.getName()).toFile()).use { (fos) ->
                     var buf = ByteArray(1024 * 8)
-                    var length = 0
+                    var length: Int
                     while (true) {
                         length = zis.read(buf)
                         if (length == -1) break;
