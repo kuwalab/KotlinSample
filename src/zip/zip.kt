@@ -12,7 +12,6 @@ fun main(args: Array<String>) {
             var entry = zis.getNextEntry()
             if (entry == null) break
 
-            println(entry.getName())
             if (entry.isDirectory()) {
                 Files.createDirectories(Paths.get("res", "zip", entry.getName()))
             } else {
