@@ -30,7 +30,7 @@ fun copy(ins: InputStream, os: OutputStream) {
     var length: Int
     while (true) {
         length = ins.read(buf)
-        if (length == -1) break;
+        if (length == -1) break
         os.write(buf, 0, length)
     }
 }
