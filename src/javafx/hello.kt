@@ -44,5 +44,5 @@ class HelloController() : Initializable {
 }
 
 fun main(args: Array<String>) {
-    Application.launch(javaClass<Hello>())
+    Application.launch(javaClass<Hello>(), *args)
 }
