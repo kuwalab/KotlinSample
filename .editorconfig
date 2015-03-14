@@ -40,6 +40,10 @@ indent_size = 1
 indent_style = space
 indent_size = 1
 
+[*.fxml]
+indent_style = space
+indent_size = 1
+
 [*.java]
 indent_style = space
 indent_size = 4

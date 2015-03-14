@@ -6,13 +6,13 @@
 <?import javafx.scene.control.Label?>
 <VBox alignment="CENTER" prefHeight="200.0" prefWidth="320.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="javafx.HelloController">
-  <children>
-    <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
-      <children>
-        <TextField fx:id="textField" prefWidth="200.0"/>
-        <Button onAction="#handle" text="Say Hello"/>
-      </children>
-    </HBox>
-    <Label fx:id="label" text="Hello, World!"/>
-  </children>
+ <children>
+  <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+   <children>
+    <TextField fx:id="textField" prefWidth="200.0"/>
+    <Button onAction="#handle" text="Say Hello"/>
+   </children>
+  </HBox>
+  <Label fx:id="label" text="Hello, World!"/>
+ </children>
 </VBox>
