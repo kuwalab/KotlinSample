@@ -15,7 +15,6 @@ import javafx.stage.Stage
 import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
 
-// 参考 http://pekokun.hatenablog.jp/entry/2013/12/08/190540
 class Hello() : Application() {
     override fun start(stage: Stage) {
         val root: Parent = FXMLLoader.load(javaClass<Hello>().getResource("hello.fxml"))
@@ -35,7 +34,7 @@ class HelloController() : Initializable {
     override fun initialize(url: URL?, rb: ResourceBundle?) {
     }
 
-    FXML fun handle(event: ActionEvent): Unit {
+    FXML fun handleButton(event: ActionEvent): Unit {
         var alert = Alert(AlertType.INFORMATION);
         alert.setTitle("Show and Wait");
         alert.getDialogPane().setHeaderText("Header Text");
