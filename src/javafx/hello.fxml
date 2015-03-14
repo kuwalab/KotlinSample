@@ -4,6 +4,6 @@
 <BorderPane prefHeight="300.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml"
             fx:controller="javafx.HelloController">
  <center>
-  <Button onAction="#handleButton" text="アラート表示" />
+  <Button onAction="#handleInformationButton" text="アラート表示" />
  </center>
 </BorderPane>

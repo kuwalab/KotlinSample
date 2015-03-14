@@ -34,7 +34,7 @@ class HelloController() : Initializable {
     override fun initialize(url: URL?, rb: ResourceBundle?) {
     }
 
-    FXML fun handleButton(event: ActionEvent): Unit {
+    FXML fun handleInformationButton(event: ActionEvent): Unit {
         var alert = Alert(AlertType.INFORMATION);
         alert.setTitle("Show and Wait");
         alert.getDialogPane().setHeaderText("Header Text");
