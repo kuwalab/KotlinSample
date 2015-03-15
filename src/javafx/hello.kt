@@ -16,8 +16,13 @@ import javafx.scene.control.Alert
 import javafx.scene.control.Alert.AlertType
 import javafx.scene.control.ButtonType
 import javafx.scene.control.ButtonBar.ButtonData
+import javafx.scene.control.Dialog
 import javafx.scene.control.TextInputDialog
 import javafx.scene.control.ChoiceDialog
+import javafx.scene.layout.GridPane
+import javafx.scene.control.PasswordField
+import javafx.application.Platform
+import javafx.geometry.Insets
 
 class Hello() : Application() {
     override fun start(stage: Stage) {
@@ -31,6 +36,7 @@ class Hello() : Application() {
     }
 }
 
+// 参考 http://code.makery.ch/blog/javafx-dialogs-official/
 class HelloController() : Initializable {
     FXML var textField: TextField? = null
     FXML var label: Label? = null
@@ -99,6 +105,55 @@ class HelloController() : Initializable {
         dialog.setContentText("Choose your letter:")
 
         var result = dialog.showAndWait()
+    }
+
+    FXML fun handleLoginButton(event: ActionEvent): Unit {
+        var dialog = Dialog<Pair<String, String>>()
+        dialog.setTitle("Login Dialog")
+        dialog.setHeaderText("Look, a Custom Login Dialog")
+
+
+        var loginButtonType = ButtonType("Login", ButtonData.OK_DONE)
+        dialog.getDialogPane().getButtonTypes().addAll(loginButtonType, ButtonType.CANCEL)
+
+        var grid = GridPane()
+        grid.setHgap(10.0)
+        grid.setVgap(10.0)
+        grid.setPadding(Insets(20.0, 150.0, 10.0, 10.0))
+
+        var username = TextField()
+        username.setPromptText("Username")
+        var password = PasswordField()
+        password.setPromptText("Password")
+
+        grid.add(Label("Username:"), 0, 0);
+        grid.add(username, 1, 0);
+        grid.add(Label("Password:"), 0, 1);
+        grid.add(password, 1, 1);
+
+        var loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
+        loginButton.setDisable(true);
+
+        username.textProperty().addListener({(observable, oldValue, newValue) ->
+            loginButton.setDisable(newValue.trim().isEmpty()
+        )})
+
+        dialog.getDialogPane().setContent(grid)
+
+        Platform.runLater({() -> username.requestFocus()})
+
+//        dialog.setResultConverter({dialogButton ->
+//            if (dialogButton == loginButtonType) {
+//                return Pair<>(username.getText(), password.getText())
+//            }
+//            return null
+//        })
+
+        var result = dialog.showAndWait()
+
+        result.ifPresent({usernamePassword ->
+//            println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue())
+        })
     }
 }
 

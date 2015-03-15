@@ -18,6 +18,7 @@
     <Button onAction="#handleErrorButton" text="アラート（Error）表示" />
     <Button onAction="#handleTextInputButton" text="Text表示" />
     <Button onAction="#handleChoiceButton" text="Choice表示" />
+    <Button onAction="#handleLoginButton" text="Login表示" />
    </children>
   </FlowPane>
  </center>
