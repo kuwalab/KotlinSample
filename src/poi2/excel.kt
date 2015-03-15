@@ -78,22 +78,22 @@ fun Sheet.set(x: Int, y: Int, value: Any) {
     }
 }
 
+val ORIGIN = 'A'.toInt()
+val RADIX = 26
+
 // 参考 https://github.com/nobeans/gexcelapi/blob/master/src/main/groovy/org/jggug/kobo/gexcelapi/CellLabelUtils.groovy
 fun Sheet.at(cellLabel: String): Cell {
     val p1 = Pattern.compile("([a-zA-Z]+)([0-9]+)");
     val matcher = p1.matcher(cellLabel)
     matcher.find()
 
-    var origin = 'A'.toInt()
-    var radix = 26
     var num = 0
     matcher.group(1).toUpperCase().reverse().forEachIndexed {
         (i, c) ->
-        var delta = c.toInt() - origin + 1
-        num = num + delta * Math.pow(radix.toDouble(), i.toDouble()).toInt()
+        var delta = c.toInt() - ORIGIN+ 1
+        num = num + delta * Math.pow(RADIX.toDouble(), i.toDouble()).toInt()
     }
     num = num - 1
-    println ("${num}, ${matcher.group(2).toInt() -1}")
-    return this[matcher.group(2).toInt() - 1][num]
+    return this[num, matcher.group(2).toInt() - 1]
 }
 
