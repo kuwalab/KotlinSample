@@ -31,6 +31,7 @@ fun main(args: Array<String>) {
         sheet[0, 10] = "あいうえお"
         sheet[0, 11] = 100
         sheet[0, 12] = 1.2
+        sheet at "E7" value 100
 
         Excel.write(workbook, "res/ブック2.xlsx")
     }
@@ -97,3 +98,11 @@ fun Sheet.at(cellLabel: String): Cell {
     return this[num, matcher.group(2).toInt() - 1]
 }
 
+fun Cell.value(value: Any) {
+    when (value) {
+        is String -> this.setCellValue(value)
+        is Int -> this.setCellValue(value.toDouble())
+        is Double -> this.setCellValue(value)
+        else -> throw IllegalArgumentException("文字列か数値だけにして")
+    }
+}
