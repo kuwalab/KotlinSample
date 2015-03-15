@@ -1,9 +1,24 @@
 <?import javafx.scene.layout.BorderPane?>
 
 <?import javafx.scene.control.Button?>
-<BorderPane prefHeight="300.0" prefWidth="400.0" xmlns:fx="http://javafx.com/fxml"
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.geometry.Insets?>
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml"
             fx:controller="javafx.HelloController">
  <center>
-  <Button onAction="#handleInformationButton" text="アラート表示" />
+  <FlowPane alignment="CENTER" hgap="8.0" vgap="4.0">
+   <padding>
+    <Insets top="12.0" bottom="12.0" left="24.0" right="24.0" />
+   </padding>
+   <children>
+    <Button onAction="#handleNoneButton" text="アラート（None）表示" />
+    <Button onAction="#handleConfirmationButton" text="アラート（Conf）表示" />
+    <Button onAction="#handleInformationButton" text="アラート（Info）表示" />
+    <Button onAction="#handleWarningButton" text="アラート（Warn）表示" />
+    <Button onAction="#handleErrorButton" text="アラート（Error）表示" />
+    <Button onAction="#handleTextInputButton" text="Text表示" />
+    <Button onAction="#handleChoiceButton" text="Choice表示" />
+   </children>
+  </FlowPane>
  </center>
 </BorderPane>
