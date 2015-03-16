@@ -32,6 +32,7 @@ fun main(args: Array<String>) {
         sheet[0, 11] = 100
         sheet[0, 12] = 1.2
         sheet at "E7" value 100
+        println(sheet at "E7")
 
         Excel.write(workbook, "res/ブック2.xlsx")
     }
@@ -91,11 +92,27 @@ fun Sheet.at(cellLabel: String): Cell {
     var num = 0
     matcher.group(1).toUpperCase().reverse().forEachIndexed {
         (i, c) ->
-        var delta = c.toInt() - ORIGIN+ 1
+        var delta = c.toInt() - ORIGIN + 1
         num = num + delta * Math.pow(RADIX.toDouble(), i.toDouble()).toInt()
     }
     num = num - 1
     return this[num, matcher.group(2).toInt() - 1]
+}
+
+fun Cell.value() : Any {
+    val cellType = this.getCellType()
+    if (Cell.CELL_TYPE_STRING == cellType) {
+        return this.getStringCellValue()
+    }
+    if (Cell.CELL_TYPE_NUMERIC == cellType) {
+        return this.getNumericCellValue()
+    }
+    return ""
+// エラーになる
+//    when (this.getCellType()) {
+//        is Cell.CELL_TYPE_STRING -> this.getStringCellValue()
+//        else -> 1 // 適当
+//    }
 }
 
 fun Cell.value(value: Any) {
