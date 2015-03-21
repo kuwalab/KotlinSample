@@ -13,7 +13,7 @@ import kotlin.platform.platformStatic
 import java.util.regex.Pattern
 
 fun main(args: Array<String>) {
-    Excel.open("res/ブック1.xlsx").use { (workbook) ->
+    Excel.open("res/ブック1.xlsx").use { workbook ->
         var sheet = workbook.getSheetAt(0)
 
         // セルの読み込み
@@ -91,7 +91,7 @@ fun Sheet.at(cellLabel: String): Cell {
 
     var num = 0
     matcher.group(1).toUpperCase().reverse().forEachIndexed {
-        (i, c) ->
+        i, c ->
         var delta = c.toInt() - ORIGIN + 1
         num = num + delta * Math.pow(RADIX.toDouble(), i.toDouble()).toInt()
     }
