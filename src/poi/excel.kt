@@ -12,7 +12,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory
 import kotlin.platform.platformStatic
 
 fun main(args: Array<String>) {
-    Excel.open("res/ブック1.xlsx").use { (workbook) ->
+    Excel.open("res/ブック1.xlsx").use { workbook ->
         var sheet = workbook.getSheetAt(0)
 
         // セルの読み込み
