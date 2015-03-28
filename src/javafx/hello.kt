@@ -1,28 +1,21 @@
 package javafx
 
 import javafx.application.Application
+import javafx.application.Platform
+import javafx.event.ActionEvent
+import javafx.fxml.FXML
 import javafx.fxml.FXMLLoader
+import javafx.fxml.Initializable
+import javafx.geometry.Insets
 import javafx.scene.Parent
 import javafx.scene.Scene
-import javafx.fxml.Initializable
-import javafx.event.ActionEvent
+import javafx.scene.control.*
+import javafx.scene.control.Alert.AlertType
+import javafx.scene.control.ButtonBar.ButtonData
+import javafx.scene.layout.GridPane
+import javafx.stage.Stage
 import java.net.URL
 import java.util.ResourceBundle
-import javafx.scene.control.TextField
-import javafx.scene.control.Label
-import javafx.fxml.FXML
-import javafx.stage.Stage
-import javafx.scene.control.Alert
-import javafx.scene.control.Alert.AlertType
-import javafx.scene.control.ButtonType
-import javafx.scene.control.ButtonBar.ButtonData
-import javafx.scene.control.Dialog
-import javafx.scene.control.TextInputDialog
-import javafx.scene.control.ChoiceDialog
-import javafx.scene.layout.GridPane
-import javafx.scene.control.PasswordField
-import javafx.application.Platform
-import javafx.geometry.Insets
 
 class Hello() : Application() {
     override fun start(stage: Stage) {
@@ -108,7 +101,7 @@ class HelloController() : Initializable {
     }
 
     FXML fun handleLoginButton(event: ActionEvent): Unit {
-        var dialog = Dialog<Pair<String, String>>()
+        var dialog = Dialog<Login>()
         dialog.setTitle("Login Dialog")
         dialog.setHeaderText("Look, a Custom Login Dialog")
 
@@ -134,29 +127,34 @@ class HelloController() : Initializable {
         var loginButton = dialog.getDialogPane().lookupButton(loginButtonType);
         loginButton.setDisable(true);
 
-        username.textProperty().addListener({(observable, oldValue, newValue) ->
+        username.textProperty().addListener({ observable, oldValue, newValue ->
             loginButton.setDisable(newValue.trim().isEmpty()
-        )})
+            )
+        })
 
         dialog.getDialogPane().setContent(grid)
 
-        Platform.runLater({() -> username.requestFocus()})
+        Platform.runLater({ -> username.requestFocus() })
 
-//        dialog.setResultConverter({dialogButton ->
-//            if (dialogButton == loginButtonType) {
-//                return Pair<>(username.getText(), password.getText())
-//            }
-//            return null
-//        })
+        dialog.setResultConverter({ dialogButton ->
+            if (dialogButton == loginButtonType) {
+                Login(username.getText(), password.getText())
+            } else {
+                null
+            }
+        })
 
         var result = dialog.showAndWait()
 
-        result.ifPresent({usernamePassword ->
-//            println("Username=" + usernamePassword.getKey() + ", Password=" + usernamePassword.getValue())
+        result.ifPresent({ login ->
+                       println("Username=" + login.userName + ", Password=" + login.password)
         })
     }
 }
 
 fun main(args: Array<String>) {
     Application.launch(javaClass<Hello>(), *args)
+}
+
+class Login(var userName: String, var password: String) {
 }
