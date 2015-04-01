@@ -26,11 +26,5 @@ fun main(args: Array<String>) {
 }
 
 fun copy(ins: InputStream, os: OutputStream) {
-    var buf = ByteArray(1024 * 8)
-    var length: Int
-    while (true) {
-        length = ins.read(buf)
-        if (length == -1) break
-        os.write(buf, 0, length)
-    }
+    ins.copyTo(os, bufferSize = 1024 * 8)
 }
